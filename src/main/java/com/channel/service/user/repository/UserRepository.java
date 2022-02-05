@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends CrudRepository<User, UserPK> {
 
-    @Query(value = "SELECT * FROM Users u WHERE u.userid = ?1", nativeQuery = true)
+    @Query(value = "SELECT * FROM Users u WHERE u.userid = ?", nativeQuery = true)
     User findByUserId(String userid);
 
 }
