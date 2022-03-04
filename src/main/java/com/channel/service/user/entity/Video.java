@@ -52,12 +52,12 @@ public class Video implements Serializable {
 	@Column(name="\"likes#\"")
 	private Integer likes_;
 	
-	@Type(type = "string-array")
+	/*@Type(type = "string-array")
     @Column(
         name = "tags",
         columnDefinition = "text[]"
-    )
-	private Array tags;
+    )*/
+	//private Array tags;
 
 	//@Column(length=255)
 	private String thumbniladdress;
@@ -144,14 +144,11 @@ public class Video implements Serializable {
 		this.likes_ = likes_;
 	}
 
-	public Array getTags() {
-		return this.tags;
-	}
-
-	public void setTags(Array tags) {
-		this.tags = tags;
-	}
-
+	/*
+	 * public Array getTags() { return this.tags; }
+	 * 
+	 * public void setTags(Array tags) { this.tags = tags; }
+	 */
 	public String getThumbniladdress() {
 		return this.thumbniladdress;
 	}
