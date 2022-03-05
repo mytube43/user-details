@@ -12,9 +12,24 @@ import lombok.Data;
  *
  */
 
-@Data
+
 public class MTPage {
 
 	private String pageType;
 	private Map<String,Object> pageMap= new HashMap<>();
+	public String getPageType() {
+		return pageType;
+	}
+	public void setPageType(String pageType) {
+		this.pageType = pageType;
+	}
+	public Map<String, Object> getPageMap() {
+		return pageMap;
+	}
+	public void setPageMap(Map<String, Object> pageMap) {
+		this.pageMap = pageMap;
+	}
+	
+	
+	
 }

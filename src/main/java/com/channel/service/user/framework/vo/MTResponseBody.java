@@ -17,6 +17,13 @@ public class MTResponseBody {
 	
 	private MTPage page = new MTPage();
 
+	public MTPage getPage() {
+		return this.page;
+	}
+	
+	public void setPage(MTPage page) {
+		this.page = page;
+	}
 	
 	
 }
