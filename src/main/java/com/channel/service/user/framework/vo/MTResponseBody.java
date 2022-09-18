@@ -12,7 +12,7 @@ import lombok.Data;
  *
  */
 
-@Data
+
 public class MTResponseBody {
 	
 	private MTPage page = new MTPage();
@@ -24,6 +24,7 @@ public class MTResponseBody {
 	public void setPage(MTPage page) {
 		this.page = page;
 	}
+	
 	
 	
 }

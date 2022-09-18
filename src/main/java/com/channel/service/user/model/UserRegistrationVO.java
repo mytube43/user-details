@@ -23,6 +23,35 @@ public class UserRegistrationVO {
 	@JsonProperty("password")
 	private String password;
 	
+	@JsonProperty("gender")
+	private String gender;
+	
+	@JsonProperty("userId")
+	private String userId;
+	
+	@JsonProperty("state")
+	private String state;
+	
+	
+	
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public String getGender() {
+		return gender;
+	}
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
 	public String getFirstName() {
 		return firstName;
 	}

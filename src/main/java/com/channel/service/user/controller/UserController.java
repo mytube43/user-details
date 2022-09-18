@@ -1,9 +1,11 @@
 package com.channel.service.user.controller;
 
+import com.channel.service.user.framework.vo.MTResponseVO;
 import com.channel.service.user.model.Response;
 import com.channel.service.user.model.StringResponseModel;
 import com.channel.service.user.model.UserModel;
 import com.channel.service.user.model.UserRegistrationVO;
+import com.channel.service.user.service.IRegisterUserService;
 import com.channel.service.user.service.UserService;
 import com.channel.service.user.util.ResponseUtil;
 import com.channel.service.user.validator.UserValidator;
@@ -20,7 +22,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/channel/service/v1")
+@RequestMapping("/user/service/v1")
 public class UserController {
 	private static final Logger log = LoggerFactory.getLogger(UserController.class);
 	@Autowired
@@ -28,6 +30,9 @@ public class UserController {
 	
 	@Autowired
 	UserValidator validator;
+	
+	@Autowired
+	IRegisterUserService registrationService;
 	
 	@PostMapping(value = "/users",consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Response> register(@RequestBody UserModel user) {
@@ -39,21 +44,21 @@ public class UserController {
 	}
 	
 	@PostMapping(value = "/userRegistration")
-	public ResponseEntity<Response> registerUser(@RequestBody String payload) {
+	public ResponseEntity<MTResponseVO> registerUser(@RequestBody String payload) {
 		ObjectMapper objMapper = new ObjectMapper();
 		objMapper.configure(DeserializationFeature.UNWRAP_ROOT_VALUE, true);
-		
+	
 		UserRegistrationVO user=null;
 		try {
 			user = objMapper.readValue(payload, UserRegistrationVO.class);
-		} catch (JsonProcessingException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			log.error(""+e);
-		}
+			MTResponseVO responseVO =registrationService.registerUser(user);
 		
-		log.info("-------------   "+user);
-		return ResponseUtil.getResponseEntity(HttpStatus.OK, new StringResponseModel("user registration completed successfully."));
+				return new ResponseEntity<MTResponseVO>(responseVO,HttpStatus.OK);
+		} catch (JsonProcessingException e) {
+			
+			log.error("Exception while transforming request"+e);
+		}
+		return new ResponseEntity<MTResponseVO>(new MTResponseVO(),HttpStatus.BAD_REQUEST);
 	}
 
 	@GetMapping("/users")
@@ -64,5 +69,6 @@ public class UserController {
 		}
 		return ResponseUtil.getResponseEntity(HttpStatus.BAD_REQUEST, new StringResponseModel("Invalid request, userId is mandatory parameter"));
 	}
-
+	
+	
 }
